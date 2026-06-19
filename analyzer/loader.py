@@ -31,7 +31,7 @@ def load_tickets(filepath: str) -> pd.DataFrame:
                 logger.warning(f"'{col}': {nulls} values are not parsed as a date")
 
     before = len(df)
-    df = df.dropna(subset=["ticket_id"]).drop_duplicates(subset=["ticket_id"])  #df.dropna(subset=["ticket_id"]) - выбрасывает строки где пустая дата
+    df = df.dropna(subset=["ticket_id"]).drop_duplicates(subset=["ticket_id"])  #df.dropna(subset=["ticket_id"]) - выбрасывает строки где пустой тикет
 #drop_duplicates(subset=["ticket_id"]) - выбрасывает строки где ticket_id повторяется
 
     dropped = before - len(df)
