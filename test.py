@@ -2,8 +2,8 @@ import logging
 from analyzer.loader import load_tickets
 from analyzer.metrics import distribution,mttr,slacheck,longtime,heatmap
 from analyzer.charts import mttr_bytype, sla_compliance,priority_distribution, priority_cchannel,heatmap_chart
-
-import base64#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+from templates.report import generate_report
+import base64
 
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -47,3 +47,6 @@ print("All charts generated:", all([img_mttr, img_sla, img_priority, img_channel
 
 with open("test_chart.png", "wb") as f:
     f.write(base64.b64decode(img_mttr))
+
+path = generate_report(df, "report.html")
+print(f"Report saved to {path}")

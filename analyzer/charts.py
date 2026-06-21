@@ -44,7 +44,7 @@ def sla_compliance(sla_series):
 #Распределение по приоритету/каналу 
 def priority_distribution(priority_series):
     fig, ax = plt.subplots(figsize=(8, 5))
-    priority_series.plot(kind="bar", ax=ax, color="#52DD91")
+    priority_series.plot(kind="bar", ax=ax, color="#D152DD")
 
     ax.set_title("Tickets by Priority")
     ax.set_xlabel("Priority")
