@@ -19,12 +19,14 @@ def mttr_bytype(mttr_series):
     fig, ax = plt.subplots(figsize=(8, 5))   # холст (fig) и оси (ax) 
     mttr_series.plot(kind="bar", ax=ax, color="#4C72B0")  #столбчатая диаграмма
 
-    ax.set_title("Average MTTR by Ticket Type")
+    ax.set_title("Average Resolution Time by Ticket Type (MTTR, hours)")
     ax.set_xlabel("Ticket Type")
-    ax.set_ylabel("Hours")
+    ax.set_ylabel("Hours to Resolve")
     plt.xticks(rotation=45, ha="right")#поворт подписей по оси х
-    plt.tight_layout()  #автоматически подгоняет отступы
+    for container in ax.containers:
+        ax.bar_label(container, fmt="%.1f", padding=3)
 
+    plt.tight_layout()  #автоматически подгоняет отступы
     return _fig_to_base64(fig)
 
 
@@ -46,12 +48,15 @@ def priority_distribution(priority_series):
     fig, ax = plt.subplots(figsize=(8, 5))
     priority_series.plot(kind="bar", ax=ax, color="#D152DD")
 
-    ax.set_title("Tickets by Priority")
+    ax.set_title("Number of Tickets by Priority Level")
     ax.set_xlabel("Priority")
     ax.set_ylabel("Number of Tickets")
     plt.xticks(rotation=0)
-    plt.tight_layout()
 
+    for container in ax.containers:
+        ax.bar_label(container, fmt="%d", padding=3)
+
+    plt.tight_layout()
     return _fig_to_base64(fig)
 
 
@@ -59,12 +64,15 @@ def priority_cchannel(priority_channel):
     fig, ax = plt.subplots(figsize=(8, 5))
     priority_channel.plot(kind="bar", ax=ax, color="#5D5BE0")
 
-    ax.set_title("Tickets by Channel")
+    ax.set_title("Number of Tickets by Support Channel")
     ax.set_xlabel("Channel")
     ax.set_ylabel("Number of Tickets")
     plt.xticks(rotation=0)
-    plt.tight_layout()
 
+    for container in ax.containers:
+        ax.bar_label(container, fmt="%d", padding=3)
+
+    plt.tight_layout()
     return _fig_to_base64(fig)
 
 
@@ -77,7 +85,8 @@ def heatmap_chart(heatmap_series):
     ax.set_title("Heatmap by hour")
     ax.set_xlabel("Hour")
     ax.set_ylabel("Count of Tickets")
+    ax.grid(True, alpha=0.3)
     plt.xticks(rotation=0)
-    plt.tight_layout()
 
+    plt.tight_layout()
     return _fig_to_base64(fig)
